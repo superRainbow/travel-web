@@ -37,7 +37,14 @@
     ]
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.3.0"
+    "cz-conventional-changelog": "^3.3.0",
+    "prettier": "2.7.1"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "printWidth": 150,
+    "singleQuote": true,
+    "endOfLine": "auto"
   },
   "config": {
     "commitizen": {
