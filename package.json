@@ -8,6 +8,8 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "gh-pages": "^4.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -42,13 +44,24 @@
   },
   "devDependencies": {
     "cz-conventional-changelog": "^3.3.0",
-    "prettier": "2.7.1"
+    "prettier": "^2.7.1"
   },
   "prettier": {
     "tabWidth": 2,
     "printWidth": 150,
     "singleQuote": true,
     "endOfLine": "auto"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "config": {
     "commitizen": {
