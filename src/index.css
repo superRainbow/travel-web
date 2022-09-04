@@ -1,6 +1,5 @@
 /* 引入 normalize.css 樣式 */
 @import-normalize;
-@import './assets/icon/twicon.css';
 
 body {
   margin: 0;
@@ -14,4 +13,56 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style-type: none;
+}
+
+
+@mixin moveInGrid($cols, $n) {
+  $rows: ceil($n / $cols);
+  .grid {       
+    grid-template-columns: repeat($cols, 1fr);
+    grid-template-rows: repeat($rows, 100% / $rows);
+    li:last-child:after,
+    li:last-child:before {
+      left: 100% * (($cols - $n) % $cols);
+      transform: translate3d(-100% * (($cols - 1) / 2), -100% * (($rows - 1) / 2), 0);
+    }
+    @for $i from 1 through $n - 1 {
+      $x: ($cols - $i) % $cols;
+      $y: $rows - floor(($i - 1) / $cols) - 1;
+        li:nth-child(#{$i}):hover ~ li:last-child:after,
+      li:nth-child(#{$i}):hover ~ li:last-child:before {
+          transform: translate3d(-$x*100%, -$y*100%, 0);   
+        }
+    }
+    li:last-child:hover:after,
+    li:last-child:hover:before {
+      transform: translate3d(-100% * (($cols - $n) % $cols), 0%, 0);  
+    }
+  }
+  
+}
+
+@mixin colors( $n, $colors ) {
+  @for $i from 1 through $n - 1 {
+    li:nth-child(#{$i}):hover ~ li:last-child:after {
+      @if (nth($colors, $i)) {
+        background: nth($colors, $i);
+      }       
+    }
+  }
+  li:last-child:hover:after {
+    background: nth($colors, -1);   
+  }
 }
